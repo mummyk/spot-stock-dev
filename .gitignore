@@ -1,7 +1,0 @@
-.env
-
-*.pyc
-__pycache__/
-*.log
-core/media/
-core/tmp/
