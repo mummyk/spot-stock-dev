@@ -11,21 +11,48 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+# from core.jazzmin_settings import JAZZMIN_SETTINGS
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x)%3(55296bs664n@gsk%$+cuj3e7(612j0oah^&*thb2srhn1'
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
+COMPANY_NAME = os.environ.get('COMPANY_NAME')
+POSTGRES_NAME = os.environ.get('POSTGRES_NAME')
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+POSTGRES_DB = os.environ.get('POSTGRES_DB')
+POSTGRES_PORT = os.environ.get('POSTGREs_PORT')
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['spot-stock-dev.onrender.com',]
+BACKEND_URL = os.environ.get('BACKEND_URL')
+FRONTEND_URL = os.environ.get('FRONTEND_URL')
+SMTP_PROVIDER = os.environ.get('SMTP_PROVIDER')
+SMTP_PORT = os.environ.get('SMTP_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+if not DEBUG:
+    # Split the ALLOWED_HOSTS environment variable into a list
+    allowed_hosts_env = os.environ.get('ALLOWED_HOSTS')
+    if allowed_hosts_env:
+        ALLOWED_HOSTS = allowed_hosts_env.split(',')
+    else:
+        ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -75,9 +102,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django_tenants.postgresql_backend',
+        # set database name
+        'NAME': POSTGRES_NAME,
+        # set your user details
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,
+        'POST': POSTGRES_PORT
+    },
 }
 
 
