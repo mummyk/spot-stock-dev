@@ -5,3 +5,6 @@ print("""
 ==== Production server ====
 ===========================
 """)
+
+
+ROOT_URLCONF = 'core.urls'
