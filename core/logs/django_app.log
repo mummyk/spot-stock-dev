@@ -11518,3 +11518,40 @@ django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 9: 'st
 [public:None] WARNING 2024-10-03 05:38:04,282 "GET /images/users/lana-byrd.png HTTP/1.1" 404 3650
 [public:None] WARNING 2024-10-03 05:38:04,392 Not Found: /images/users/bonnie-green.png
 [public:None] WARNING 2024-10-03 05:38:04,394 "GET /images/users/bonnie-green.png HTTP/1.1" 404 3659
+[public:None] INFO    2024-10-03 09:53:58,853 Watching for file changes with StatReloader
+[public:None] INFO    2024-10-03 09:54:06,853 "GET /static/css/styles.css HTTP/1.1" 304 0
+[public:None] INFO    2024-10-03 09:54:07,016 "GET /static/css/dist/styles.css?v=1727930283 HTTP/1.1" 200 41819
+[public:None] WARNING 2024-10-03 09:54:08,480 Not Found: /images/users/bonnie-green.png
+[public:None] WARNING 2024-10-03 09:54:08,495 "GET /images/users/bonnie-green.png HTTP/1.1" 404 3659
+[public:None] WARNING 2024-10-03 09:54:08,590 Not Found: /images/users/jese-leos.png
+[public:None] WARNING 2024-10-03 09:54:08,616 "GET /images/users/jese-leos.png HTTP/1.1" 404 3650
+[public:None] WARNING 2024-10-03 09:54:08,842 Not Found: /images/users/joseph-mcfall.png
+[public:None] WARNING 2024-10-03 09:54:08,849 "GET /images/users/joseph-mcfall.png HTTP/1.1" 404 3662
+[public:None] INFO    2024-10-03 09:54:08,894 "GET /static/js/theme.js HTTP/1.1" 304 0
+[public:None] INFO    2024-10-03 09:54:08,916 "GET /static/js/main.js HTTP/1.1" 304 0
+[public:None] WARNING 2024-10-03 09:54:09,090 Not Found: /images/users/leslie-livingston.png
+[public:None] WARNING 2024-10-03 09:54:09,111 Not Found: /images/users/thomas-lean.png
+[public:None] WARNING 2024-10-03 09:54:09,113 "GET /images/users/leslie-livingston.png HTTP/1.1" 404 3674
+[public:None] WARNING 2024-10-03 09:54:09,132 Not Found: /images/users/robert-brown.png
+[public:None] WARNING 2024-10-03 09:54:09,135 "GET /images/users/thomas-lean.png HTTP/1.1" 404 3656
+[public:None] WARNING 2024-10-03 09:54:09,142 "GET /images/users/robert-brown.png HTTP/1.1" 404 3659
+[public:None] WARNING 2024-10-03 09:54:09,180 Not Found: /images/users/bonnie-green-2x.png
+[public:None] WARNING 2024-10-03 09:54:09,198 "GET /images/users/bonnie-green-2x.png HTTP/1.1" 404 3668
+[public:None] WARNING 2024-10-03 09:54:09,245 Not Found: /images/users/lana-byrd.png
+[public:None] WARNING 2024-10-03 09:54:09,248 "GET /images/users/lana-byrd.png HTTP/1.1" 404 3650
+[public:None] INFO    2024-10-03 09:54:22,371 "GET /dashboard/ HTTP/1.1" 200 35210
+[public:None] INFO    2024-10-03 09:54:22,833 "GET /static/css/dist/styles.css?v=1727945661 HTTP/1.1" 200 41819
+[public:None] WARNING 2024-10-03 09:54:23,220 Not Found: /images/users/bonnie-green.png
+[public:None] WARNING 2024-10-03 09:54:23,220 "GET /images/users/bonnie-green.png HTTP/1.1" 404 3659
+[public:None] WARNING 2024-10-03 09:54:24,449 Not Found: /images/users/jese-leos.png
+[public:None] WARNING 2024-10-03 09:54:24,463 Not Found: /images/users/joseph-mcfall.png
+[public:None] WARNING 2024-10-03 09:54:24,466 "GET /images/users/jese-leos.png HTTP/1.1" 404 3650
+[public:None] WARNING 2024-10-03 09:54:24,468 "GET /images/users/joseph-mcfall.png HTTP/1.1" 404 3662
+[public:None] WARNING 2024-10-03 09:54:24,531 Not Found: /images/users/leslie-livingston.png
+[public:None] WARNING 2024-10-03 09:54:24,535 "GET /images/users/leslie-livingston.png HTTP/1.1" 404 3674
+[public:None] WARNING 2024-10-03 09:54:24,585 Not Found: /images/users/robert-brown.png
+[public:None] WARNING 2024-10-03 09:54:24,591 "GET /images/users/robert-brown.png HTTP/1.1" 404 3659
+[public:None] WARNING 2024-10-03 09:54:55,345 Not Found: /admin/login/drawer.css.map
+[public:None] WARNING 2024-10-03 09:54:55,346 "GET /admin/login/drawer.css.map HTTP/1.1" 404 8356
+[public:None] INFO    2024-10-03 10:10:09,674 C:\Users\HP\Documents\backends\core\settings\base.py changed, reloading.
+[public:None] INFO    2024-10-03 10:10:16,227 Watching for file changes with StatReloader
