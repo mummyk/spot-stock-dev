@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x)%3(55296bs664n@gsk%$+cuj3e7(612j0oah^&*thb2srhn1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['spot-stock-dev.onrender.com',]
 
 
 # Application definition
