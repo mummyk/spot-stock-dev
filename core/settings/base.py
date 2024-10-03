@@ -32,7 +32,7 @@ POSTGRES_NAME = os.environ.get('POSTGRES_NAME')
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 POSTGRES_DB = os.environ.get('POSTGRES_DB')
-POSTGREs_PORT = os.environ.get('POSTGREs_PORT')
+POSTGRES_PORT = os.environ.get('POSTGREs_PORT')
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
@@ -169,7 +169,7 @@ DATABASES = {
         'USER': POSTGRES_USER,
         'PASSWORD': POSTGRES_PASSWORD,
         'HOST': POSTGRES_HOST,
-        'POST': POSTGREs_PORT
+        'POST': POSTGRES_PORT
     },
 }
 
