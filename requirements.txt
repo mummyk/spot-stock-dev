@@ -18,3 +18,4 @@ django-widget-tweaks
 django-compressor
 django-tailwind
 gunicorn
+dj-database-url
