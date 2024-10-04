@@ -22,3 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls'))
 ]
+
+
+# Add the custom error handlers
+handler404 = 'home.views.handler404'
+handler500 = 'home.views.handler500'
+handler403 = 'home.views.handler403'
+handler400 = 'home.views.handler400'
