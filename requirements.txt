@@ -19,3 +19,4 @@ django-compressor
 django-tailwind
 gunicorn
 dj-database-url
+whitenoise
