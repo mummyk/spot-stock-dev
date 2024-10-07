@@ -195,5 +195,6 @@ class ProfileFormLite(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].error_messages = {'required': f'{
-                field.replace("_", " ").title()} is required'}
+            self.fields[field].error_messages = {
+                'required': '{} is required'.format(field.replace("_", " ").title())
+            }
