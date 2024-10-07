@@ -105,8 +105,8 @@ def user_profile(request):
     try:
         profile = Profile.objects.get(user=request.user)
     except Profile.DoesNotExist:
-        log_action(request.user, ADDITION, f"Attempted to view/edit profile for {
-                   request.user.username}, but no profile exists.")
+        # log_action(request.user, ADDITION, f"Attempted to view/edit profile for {
+        #            request.user.username}, but no profile exists.")
         profile = Profile(user=request.user)
         profile.save()
 
