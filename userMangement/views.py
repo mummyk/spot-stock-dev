@@ -93,8 +93,8 @@ def add_user(request):
             )
 
             messages.success(request, 'User added successfully!')
-            log_action(request.user, ADDITION, f"Added New user for {
-                request.user.username}", User)
+            # log_action(request.user, ADDITION, f"Added New user for {
+            #     request.user.username}", User)
             return redirect('user_list')
 
         except Exception as e:
@@ -122,9 +122,9 @@ def delete_user(request, user_id):
 
         user.delete()  # Delete the user
         messages.success(request, "User deleted successfully.")
-        log_action(request.user, DELETION, f"Deleted user for {
-            request.user.username}", User)
-        log_action
+      #   log_action(request.user, DELETION, f"Deleted user for {
+      #       request.user.username}", User)
+      #   log_action
         # Redirect to the user list or appropriate page
         return redirect('user_list')
 

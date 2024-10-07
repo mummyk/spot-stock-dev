@@ -54,8 +54,8 @@ def manage_profile_image(request):
             form.save()  # Save profile data
             messages.success(
                 request, 'Your profile picture has been updated successfully!')
-            log_action(request.user, ADDITION, f"Added profile_picture for {
-                request.user.username}", profile)
+            # log_action(request.user, ADDITION, f"Added profile_picture for {
+            #     request.user.username}", profile)
 
             # Redirect to a profile view or another page
             return redirect('profile')
@@ -63,8 +63,8 @@ def manage_profile_image(request):
         messages.error(
             request, 'Can not update your profile picture!')
 
-        log_action(request.user, ADDITION, f"Try adding profile_picture for {
-            request.user.username}", profile)
+        # log_action(request.user, ADDITION, f"Try adding profile_picture for {
+        #     request.user.username}", profile)
         form = ProfileForm(instance=profile)
 
     context = {'form': form, 'created': created, 'iurl': profile_picture_url}
@@ -88,8 +88,8 @@ def delete_profile_image(request):
 
             messages.success(
                 request, 'Your profile picture has been deleted successfully!')
-            log_action(request.user, DELETION, f"Deleted profile_picture for {
-                       request.user.username}", profile)
+            # log_action(request.user, DELETION, f"Deleted profile_picture for {
+            #            request.user.username}", profile)
 
             return redirect('profile')  # Redirect to the profile view
         else:
@@ -114,8 +114,8 @@ def user_profile(request):
         form = ProfileFormLite(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            log_action(request.user, CHANGE, f"Updated profile for {
-                       request.user.username}", profile)
+            # log_action(request.user, CHANGE, f"Updated profile for {
+            #            request.user.username}", profile)
             messages.success(request, "Profile updated successfully!")
             return redirect('user_profile')
     else:
@@ -126,8 +126,9 @@ def user_profile(request):
         profile.profile_picture.url) if profile.profile_picture else ""
 
     if request.method == 'GET':
-        log_action(request.user, ADDITION, f"Viewed profile for {
-                   request.user.username}", profile)
+        pass
+        # log_action(request.user, ADDITION, f"Viewed profile for {
+        #            request.user.username}", profile)
 
     context = {
         'profile': profile,
