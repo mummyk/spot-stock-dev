@@ -98,7 +98,7 @@ def add_user(request):
             return redirect('user_list')
 
         except Exception as e:
-            messages.error(request, f'Error creating user: {str(e)}')
+            messages.error(request, {str(e)})
             return redirect('user_list')
 
     return redirect('user_list')  # Redirect if not POST
@@ -256,15 +256,15 @@ def manage_group_users(request, group_id):
         for user_id in user_ids_to_add:
             user = get_object_or_404(User, id=user_id)
             group.user_set.add(user)
-            messages.success(request, f'User {
-                             user.username} added to the group.')
+            # messages.success(request, f'User {
+            #                  user.username} added to the group.')
 
         # Remove users from the group
         for user_id in user_ids_to_remove:
             user = get_object_or_404(User, id=user_id)
             group.user_set.remove(user)
-            messages.success(request, f'User {
-                             user.username} removed from the group.')
+            # messages.success(request, f'User {
+            #                  user.username} removed from the group.')
 
         # Redirect to the same page
         return redirect('manage_group_users', group_id=group.id)
@@ -311,15 +311,15 @@ def list_groups_with_users(request):
         for user_id in user_ids_to_add:
             user = get_object_or_404(User, id=user_id)
             group.user_set.add(user)
-            messages.success(request, f'User {
-                             user.username} added to the group {group.name}.')
+            # messages.success(request, f'User {
+            #                  user.username} added to the group {group.name}.')
 
         # Remove users from the group
         for user_id in user_ids_to_remove:
             user = get_object_or_404(User, id=user_id)
             group.user_set.remove(user)
-            messages.success(request, f'User {
-                             user.username} removed from the group {group.name}.')
+            # messages.success(request, f'User {
+            #                  user.username} removed from the group {group.name}.')
 
         return redirect('list_groups_with_users')  # Redirect to the same page
 

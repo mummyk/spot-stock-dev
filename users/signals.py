@@ -27,7 +27,7 @@ def assign_user_to_member_group(request, user, **kwargs):
                     for perm_code in permissions_codes:
                         permission = Permission.objects.filter(
                             content_type=content_type,
-                            codename=f'{perm_code}_{model._meta.model_name}'
+                            codename='{perm_code}_{model._meta.model_name}'
                         ).first()
                         if permission:
                             member_group.permissions.add(permission)
@@ -35,9 +35,10 @@ def assign_user_to_member_group(request, user, **kwargs):
             # Add the user to the 'Member' group
             user.groups.add(member_group)
 
-            logger.info(f"User {user.username} added to Member group with permissions: "
-                        f"{user.get_all_permissions()}")
+            # logger.info(f"User {user.username} added to Member group with permissions: "
+            #             f"{user.get_all_permissions()}")
 
     except Exception as e:
-        logger.error(f"Error in assign_user_to_member_group for user "
-                     f"{user.username}: {str(e)}")
+        print(str(e))
+        # logger.error(f"Error in assign_user_to_member_group for user "
+        #              f"{user.username}: {str(e)}")

@@ -24,7 +24,7 @@ class Profile(models.Model):
     created = models.DateTimeField('Created', auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return {self.user.username}
 
     class Meta:
         verbose_name = 'Profile'
