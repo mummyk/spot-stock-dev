@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+{% include 'partials/appbar.html' %}
+<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    {% include 'partials/sidebar.html' %}
+
+    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 p-4">
+        <main>
+            <h2 class="text-xl font-semibold mb-6">Manage Users in Group: {{ group.name }}</h2>
+
+            <form method="GET" class="mb-4">
+                {{ user_filter.form.as_p }}  <!-- Render the filter form -->
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Filter Users
+                </button>
+            </form>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Current Members:</h3>
+                    <ul>
+                        {% for member in current_members %}
+                            <li class="flex items-center mb-2">
+                                {{ member.username }}
+                                <input type="checkbox" name="remove_users" value="{{ member.id }}" class="ml-2">
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Add Users:</h3>
+                    <select name="add_users" multiple class="border rounded w-full py-2 px-3">
+                        {% for user in user_filter.qs %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    Update Group Users
+                </button>
+            </form>
+
+            <a href="{% url 'list_groups' %}" class="text-gray-500 hover:text-blue-600 transition duration-200">Cancel</a>
+        </main>
+    </div>
+</div>
+
+{% endblock %}

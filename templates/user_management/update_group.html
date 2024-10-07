@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+{% include 'partials/appbar.html' %}
+<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    {% include 'partials/sidebar.html' %}
+
+    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 p-4">
+        <main>
+<h2 class="text-xl font-semibold mb-4">Update Group: {{ group.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <div class="mb-4">
+        <label for="group_name" class="block text-gray-700">Group Name:</label>
+        <input type="text" name="group_name" id="group_name" value="{{ group.name }}" required 
+               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+    </div>
+
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">Current Permissions:</h3>
+        {% if current_permissions %}
+            <ul>
+                {% for permission in current_permissions %}
+                    <li class="text-gray-700">{{ permission.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-500">No current permissions assigned.</p>
+        {% endif %}
+    </div>
+
+    
+
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold mb-2">Available Permissions:</h3>
+        <div class="grid grid-cols-2 gap-4">
+        {% for permission in all_permissions %}
+            <div class="flex items-center mb-2">
+                <input type="checkbox" name="permissions" value="{{ permission.id }}" id="perm_{{ permission.id }}"  class="w-4 h-4 border-gray-300 rounded bg-primary-500 focus:ring-3 focus:ring-primary-300 
+                       dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                       {% if permission in current_permissions %} checked {% endif %}>
+                <label for="perm_{{ permission.id }}" class="ml-2">{{ permission.name }}</label>
+            </div>
+        {% endfor %}
+         </div>
+    </div>
+
+    <div class="flex flex-row space-x-3">
+
+     <button type="submit" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Group</button>
+</form>
+
+<a href="{% url 'list_groups' %}" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 sm:w-auto dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</a>
+
+</div>
+
+</main>
+</div>
+</div>
+
+{% endblock %}

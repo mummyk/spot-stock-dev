@@ -1,0 +1,48 @@
+<div id="message-popup" class="hidden fixed top-5 right-5 z-50 p-4 rounded-lg">
+    <span id="message-text text-white"></span>
+    <button onclick="closePopup()" class="ml-4 text-white">✖</button>
+</div>
+
+<style>
+    #message-popup {
+        transition: opacity 0.5s ease;
+    }
+    .bg-error {
+        background-color: #f56565; /* Red for error */
+    }
+    .bg-success {
+        background-color: #48bb78; /* Green for success */
+    }
+    .bg-info {
+        background-color: #4299e1; /* Blue for info */
+    }
+</style>
+
+<script>
+function showPopup(message, type) {
+    const popup = document.getElementById('message-popup');
+    const messageText = document.getElementById('message-text');
+
+    messageText.innerText = message;
+    popup.className = `fixed top-5 right-5 z-50 p-4 rounded-lg ${type}`;
+    
+    popup.classList.remove('hidden');
+    
+    setTimeout(() => {
+        closePopup();
+    }, 5000);
+}
+
+function closePopup() {
+    const popup = document.getElementById('message-popup');
+    popup.classList.add('hidden');
+}
+</script>
+
+{% if messages %}
+<script>
+{% for message in messages %}
+showPopup("{{ message }}", "{% if message.tags %}bg-{{ message.tags }}{% else %}bg-info{% endif %}");
+{% endfor %}
+</script>
+{% endif %}
