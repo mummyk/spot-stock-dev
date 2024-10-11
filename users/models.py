@@ -11,8 +11,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(
         upload_to='profile_pictures/', blank=True, null=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
     country = CountryField()
     city = models.CharField(max_length=100)
     address = models.CharField(max_length=500)
@@ -24,7 +22,7 @@ class Profile(models.Model):
     created = models.DateTimeField('Created', auto_now_add=True)
 
     def __str__(self):
-        return {self.user.username}
+        return f'{self.user.username} Profile'
 
     class Meta:
         verbose_name = 'Profile'

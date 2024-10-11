@@ -1,4 +1,7 @@
 
+from django.contrib.auth.models import User, Group
+from django.db.models import Prefetch
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import ListView
 from django.contrib.auth.models import User
@@ -21,6 +24,9 @@ from django_filters.views import FilterView
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION
 from utils.decorators.permission_required import permissions_required
 from users.models import Profile
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -32,35 +38,77 @@ def user_management(request):
     return render(request, 'user_management/get_all.html', context)
 
 
+# @login_required
+# @permission_required("auth.view_user")
+# def user_list_view(request):
+#     # Exclude superusers from the queryset and fetch profiles
+#     queryset = User.objects.exclude(
+#         is_superuser=True).select_related('profile')
+
+#     # Get the search query from GET parameters
+#     email_query = request.GET.get('email', '')
+#     if email_query:
+#         queryset = queryset.filter(
+#             email__icontains=email_query)  # Filter by email
+
+#     # Order by username or any other field you prefer
+#     queryset = queryset.order_by('username')  # Explicitly order the queryset
+
+#     # Apply filtering using UserFilter
+#     user_filter = UserFilter(request.GET, queryset=queryset)
+#     filtered_queryset = user_filter.qs
+
+#     # Prefetch related groups for each user
+#     filtered_queryset = filtered_queryset.prefetch_related('groups')
+
+#     # Pagination logic
+#     paginator = Paginator(filtered_queryset, 10)  # Show 10 users per page
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+
+#     return render(request, 'user_management/get_all.html', {
+#         'page_obj': page_obj,
+#         'filter': user_filter,
+#     })
+
+
 @login_required
 @permission_required("auth.view_user")
 def user_list_view(request):
-    # Exclude superusers from the queryset and fetch profiles
-    queryset = User.objects.exclude(
-        is_superuser=True).select_related('profile')
+    try:
+        # Exclude superusers from the queryset and fetch profiles
+        queryset = User.objects.exclude(
+            is_superuser=True).select_related('profile')
 
-    # Get the search query from GET parameters
-    email_query = request.GET.get('email', '')
-    if email_query:
-        queryset = queryset.filter(
-            email__icontains=email_query)  # Filter by email
+        # Get the search query from GET parameters
+        email_query = request.GET.get('email', '')
+        if email_query:
+            queryset = queryset.filter(
+                email__icontains=email_query)  # Filter by email
 
-    # Order by username or any other field you prefer
-    queryset = queryset.order_by('username')  # Explicitly order the queryset
+        # Order by username or any other field you prefer
+        # Explicitly order the queryset
+        queryset = queryset.order_by('username')
 
-    # Apply filtering using UserFilter
-    user_filter = UserFilter(request.GET, queryset=queryset)
-    filtered_queryset = user_filter.qs
+        # Apply filtering using UserFilter
+        user_filter = UserFilter(request.GET, queryset=queryset)
+        filtered_queryset = user_filter.qs
 
-    # Pagination logic
-    paginator = Paginator(filtered_queryset, 10)  # Show 10 users per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+        # Prefetch related groups for each user
+        filtered_queryset = filtered_queryset.prefetch_related('groups')
 
-    return render(request, 'user_management/get_all.html', {
-        'page_obj': page_obj,
-        'filter': user_filter,
-    })
+        # Pagination logic
+        paginator = Paginator(filtered_queryset, 10)  # Show 10 users per page
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'user_management/get_all.html', {
+            'page_obj': page_obj,
+            'filter': user_filter,
+        })
+    except Exception as e:
+        logger.error(f"Error occurred: {e}")
+        return render(request, 'user_management/error.html', {'error': str(e)})
 
 
 @login_required
@@ -122,9 +170,9 @@ def delete_user(request, user_id):
 
         user.delete()  # Delete the user
         messages.success(request, "User deleted successfully.")
-      #   log_action(request.user, DELETION, f"Deleted user for {
-      #       request.user.username}", User)
-      #   log_action
+        #   log_action(request.user, DELETION, f"Deleted user for {
+        #       request.user.username}", User)
+        #   log_action
         # Redirect to the user list or appropriate page
         return redirect('user_list')
 

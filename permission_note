@@ -1,0 +1,41 @@
+Here is a list of the default Django permissions using the format app_name.permission_codename:
+
+auth (Authentication and Authorization)
+auth.add_user
+auth.change_user
+auth.delete_user
+auth.view_user
+auth.add_group
+auth.change_group
+auth.delete_group
+auth.view_group
+auth.add_permission
+auth.change_permission
+auth.delete_permission
+auth.view_permission
+
+admin (Admin Interface)
+admin.add_logentry
+admin.change_logentry
+admin.delete_logentry
+admin.view_logentry
+
+contenttypes (Content Types Framework)
+contenttypes.add_contenttype
+contenttypes.change_contenttype
+contenttypes.delete_contenttype
+contenttypes.view_contenttype
+
+sessions (Session Management)
+sessions.add_session
+sessions.change_session
+sessions.delete_session
+sessions.view_session
+
+sites (Sites Framework)
+sites.add_site
+sites.change_site
+sites.delete_site
+sites.view_site
+
+This list includes permissions for auth, admin, contenttypes, sessions, and sites, which are part of Django's built-in apps. If you have custom apps, they will also have add, change, delete, and view permissions for each model by default.
