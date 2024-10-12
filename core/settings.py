@@ -61,14 +61,14 @@ if not DEBUG:
     if allowed_hosts_env:
         ALLOWED_HOSTS = allowed_hosts_env.split(',')
     else:
-        ALLOWED_HOSTS = ['hhimanager.com','157.245.85.81']
+        ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81']
 else:
     print("""
 ==========================
 === Development server ===
 ==========================
 """)
-    ALLOWED_HOSTS = ['hhimanager.com','157.245.85.81']
+    ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81']
 
 
 # Application definition
@@ -271,12 +271,12 @@ STATICFILES_DIRS = [
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-#STORAGES = {
-    # ...
-#    "staticfiles": {
-#        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#    },
-#}
+# STORAGES = {
+#     # ...
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 
 # Default primary key field type
