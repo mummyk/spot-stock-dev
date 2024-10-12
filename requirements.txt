@@ -20,3 +20,4 @@ django-tailwind
 gunicorn
 dj-database-url
 whitenoise
+whitenoise[brotli]
