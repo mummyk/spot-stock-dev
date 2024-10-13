@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from shutil import which
-import dj_database_url
 from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
 # from core.jazzmin_settings import JAZZMIN_SETTINGS
 
@@ -102,6 +102,7 @@ SHARED_APPS = (
 )
 
 TENANT_APPS = [
+    "tenant",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
