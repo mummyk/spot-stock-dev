@@ -61,14 +61,14 @@ if not DEBUG:
     if allowed_hosts_env:
         ALLOWED_HOSTS = allowed_hosts_env.split(',')
     else:
-        ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81']
+        ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81','www.hhimanager.com','.hhimanager.com']
 else:
     print("""
 ==========================
 === Development server ===
 ==========================
 """)
-    ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81']
+    ALLOWED_HOSTS = ['hhimanager.com', '157.245.85.81','www.hhimanager.com','.hhimanager.com']
 
 
 # Application definition
