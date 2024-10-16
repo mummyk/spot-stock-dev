@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex flex-col items-center  w-full h-screen  p-8">
+<div class="container w-full h-screen p-8">
+       {% if error %}
+<div id="error-alert" class="bg-red-700 border border-red-400 text-white px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">Error: </strong>
+    <span class="block sm:inline">{{ error }}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3 text-white">
+        <button type="button" onclick="document.getElementById('error-alert').style.display='none'">
+            <svg class="fill-current h-6 w-6 text-white" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 00-1.414 1.414l2.934 2.934-2.934 2.934a1 1 0 001.414 1.414L10 10.828l2.934 2.934a1 1 0 001.414-1.414l-2.934-2.934 2.934-2.934z"/>
+            </svg>
+        </button>
+      </span>
+</div>
+{% endif %}
+<a href="{% url 'transfer' %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>Back to Transfer</a>
+</div>
+</div>
+   
+{% endblock content %}
+   

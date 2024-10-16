@@ -38,10 +38,12 @@ def tenant_create_view(request):
         form = ClientForm(request.POST, request.FILES)
         if form.is_valid():
             schema_name = form.cleaned_data['schema_name']
+            email = form.cleaned_data['company_email']
             # Create the tenant using form data
             tenant = Client(
                 schema_name=form.cleaned_data['schema_name'],
                 name=form.cleaned_data['name'],
+                company_email=email,
                 country=form.cleaned_data['country'],
                 city=form.cleaned_data['city'],
                 owner=request.user,  # Set the owner to the logged-in user

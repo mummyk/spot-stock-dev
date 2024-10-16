@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="number" name="amount" placeholder="Amount" required>
+    <button type="submit">Pay</button>
+</form>

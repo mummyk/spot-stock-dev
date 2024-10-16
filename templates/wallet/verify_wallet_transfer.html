@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Centered Transfer From Wallet Form -->
+<div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="relative w-full max-w-2xl px-4">
+        <!-- Form content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <!-- Form header -->
+            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                <h3 class="text-xl font-semibold dark:text-white">
+                    Transfer From Wallet 
+                    {% comment %} <p>User ID: <span id="display-user-id"></span></p> {% endcomment %}
+                </h3>
+            </div>
+            {% if error %}
+               <div id="error-alert" class="bg-red-700 border border-red-400 text-white px-4 py-3 rounded relative" role="alert">
+                  <strong class="font-bold">Error: </strong>
+                  <span class="block sm:inline">{{ error }}</span>
+                  <span class="absolute top-0 bottom-0 right-0 px-4 py-3 text-white">
+                     <button type="button" onclick="document.getElementById('error-alert').style.display='none'">
+                           <svg class="fill-current h-6 w-6 text-white" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                              <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 00-1.414 1.414l2.934 2.934-2.934 2.934a1 1 0 001.414 1.414L10 10.828l2.934 2.934a1 1 0 001.414-1.414l-2.934-2.934 2.934-2.934z"/>
+                           </svg>
+                     </button>
+                     </span>
+               </div>
+               {% endif %}
+            <!-- Form body -->
+            <div class="p-6 space-y-6">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                            <input type="number" name="amount" id="amount" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter Amount" required>
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <input type="password" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter a secure Wallet password" required>
+                        </div>
+                    </div> 
+                    <!-- Form footer -->
+                    <div class="items-center p6 border-t border-gray200 rounded-b dark:border-gray700 pt-6">
+                        <button type="submit" name="transfer" class="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                            Send Funds
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

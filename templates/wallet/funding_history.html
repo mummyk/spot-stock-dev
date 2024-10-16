@@ -1,0 +1,6 @@
+<h1>Wallet Funding History</h1>
+<ul>
+    {% for transaction in transactions %}
+        <li>{{ transaction.timestamp }}: {{ transaction.amount }} funded via {{ transaction.payment_method }} - {{ transaction.description }}</li>
+    {% endfor %}
+</ul>

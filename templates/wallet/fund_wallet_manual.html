@@ -1,0 +1,20 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="amount">Amount to Fund:</label>
+    <input type="number" name="amount" required>
+
+    <label for="payment_method">Payment Method:</label>
+    <select name="payment_method" required>
+        <option value="cash">Cash</option>
+        <option value="bank_transfer">Bank Transfer</option>
+    </select>
+
+    <label for="description">Description (optional):</label>
+    <input type="text" name="description">
+
+    <button type="submit">Fund Wallet</button>
+</form>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}

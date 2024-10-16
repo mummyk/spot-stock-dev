@@ -10,6 +10,7 @@ class Client(TenantMixin):
     # logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)
     owner = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, related_name='tenant_owner')
+    company_email = models.EmailField(max_length=254, unique=True)
     country = CountryField(blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
     address = models.CharField(

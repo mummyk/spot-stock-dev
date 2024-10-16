@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+
+
+{% block content %}
+
+{% include 'partials/appbar.html' %}
+<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    {% include 'partials/sidebar.html' %}
+
+ <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+<main>
+
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full mb-1">
+        <div class="mb-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+                  <li class="inline-flex items-center">
+                    <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+                      <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <div class="flex items-center">
+                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                      <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Wallet</a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center">
+                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                      <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Transfer</span>
+                    </div>
+                  </li>
+                </ol>
+            </nav>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Transfer to user</h1>
+        </div>
+       <div class="sm:flex sm:flex-wrap ">
+   <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
+        <form method="GET" action="{% url 'transfer' %}" class="flex space-y-4 space-x-2">
+         {% csrf_token %}
+            <!-- Email Filter -->
+            <div>
+                <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                {{ filter.form.email|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" }}
+            </div>
+
+            <!-- Username Filter -->
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                {{ filter.form.username|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" }}
+            </div>
+
+            <!-- First Name Filter -->
+            <div>
+                <label for="id_first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+                {{ filter.form.first_name|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" }} 
+            </div>
+
+            <!-- Last Name Filter -->
+            <div>
+                <label for="id_last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+                {{ filter.form.last_name|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" }} 
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end mt-4 hidden">
+                <button type="submit" 
+                    class="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Filter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+
+<div class="flex flex-col">
+   <div class="overflow-x-auto">
+      <div class="inline-block min-w-full align-middle">
+         <div class="overflow-hidden shadow">
+            <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+               <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                           <th scope="col" class="p-4">
+                              <div class="flex items-center">
+                                 <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                                 <label for="checkbox-all" class="sr-only">checkbox</label>
+                              </div>
+                           </th>
+                           <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Name</th>
+                           <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Email</th>
+                           <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">First Name</th> <!-- This will now show Groups -->
+                           <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Last Name</th>
+                           <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Action</th>
+                           
+                        </tr>
+                     </thead>
+                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                        
+                        {% for user in users %}
+                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                           <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-{{ user.id }}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checkbox-{{ user.id }}" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+                            <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+                                <div class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <div class="text-base font-semibold text-gray-900 dark:text-white">{{ user.email }}</div>
+                                   
+                                </div>
+                            </td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ user.username }}</td> <!-- Adjust date format as necessary -->
+                            <td class="p4 text-base font-medium text-gray900 whitespace-nowrap dark:text-white">
+                                {{user.first_name}}
+                            </td> <!-- This will now show Groups -->
+                            <td class="p4 text-base font-medium text-gray900 whitespace-nowrap dark:text-white">
+                                {{user.last_name}}
+                            </td>
+                           
+                            <td class="p4 space-x2 whitespace-nowrap">
+
+                              
+                                {% comment %} <form method="POST" action="{% url 'delete_user' user.id %}" style="display:inline;">
+                                     {% csrf_token %}
+                                    <input type="hidden" name="to_user_id" value="{{ user.id }}">
+                                    <input type="number" name="amount" placeholder="Amount" required>
+                                    <input type="password" name="password" placeholder="Your Password" required> {% endcomment %}
+                                    <a href="{% url 'verify_wallet_transfer' user.id %}" type="button"   class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>Transfer</a>
+
+                                {% comment %} </form> {% endcomment %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center p4">No users found.</td> <!-- Adjust colspan as necessary -->
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% if error %}
+<div id="error-alert" class="bg-red-700 border border-red-400 text-white px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">Error: </strong>
+    <span class="block sm:inline">{{ error }}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3 text-white">
+        <button type="button" onclick="document.getElementById('error-alert').style.display='none'">
+            <svg class="fill-current h-6 w-6 text-white" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 00-1.414 1.414l2.934 2.934-2.934 2.934a1 1 0 001.414 1.414L10 10.828l2.934 2.934a1 1 0 001.414-1.414l-2.934-2.934 2.934-2.934z"/>
+            </svg>
+        </button>
+    </span>
+</div>
+{% endif %}
+
+
+
+<!-- Add User Modal -->
+<div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="add-user-modal">
+    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                <h3 class="text-xl font-semibold dark:text-white">
+                   Transfer From Wallet 
+                   {% comment %} <p>User ID: <span id="display-user-id"></span></p> {% endcomment %}
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="add-user-modal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <form action="{% url 'transfer' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="grid grid-cols-6 gap-6">
+                     <div class="col-span-6 sm:col-span-3">
+                        <input type="number" id="modal-user-id" name="user_id" value="">
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                           <input type="number" name="amount" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter Amount" required>
+                     </div>
+                     
+                     <div class="col-span-6 sm:col-span-3">
+                  <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                  <input type="password" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter a secure Wallet password" required>
+               </div>
+                  </div> 
+                  <!-- Modal footer -->
+                  <div class="items-center p6 border-t border-gray200 rounded-b dark:border-gray700 pt-6">
+                     <button type="submit" name="transfer" data-modal-target="add-user-modal" data-modal-toggle="add-user-modal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                 <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                 Send Funds
+                              </button>
+                  </div>
+               </form>
+        </div>
+    </div>
+</div>
+
+
+
+</main>
+</div>
+</div>
+
+<!-- JavaScript to update modal -->
+<script>
+  document.querySelectorAll('button[data-modal-toggle="add-user-modal"]').forEach(button => {
+    button.addEventListener('click', function() {
+      let userId = this.getAttribute('data-user-id');
+      
+      // Update hidden input
+      document.getElementById('modal-user-id').value = userId;
+      
+      // Display the user ID in the modal
+      document.getElementById('display-user-id').textContent = userId;
+    });
+  });
+</script>
+{% endblock content %}
+   
+
+
+
+
+{% comment %} {% extends "base.html" %}
+
+{% block content %}
+<h2>Transfer Funds</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="search">Search</button>
+</form>
+
+{% if users %}
+<h3>Search Results:</h3>
+<ul>
+    {% for user in users %}
+    <li>
+        {{ user.username }} - {{ user.email }} - {{ user.first_name }} {{ user.last_name }}
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="to_user_id" value="{{ user.id }}">
+            <input type="number" name="amount" placeholder="Amount" required>
+            <input type="password" name="password" placeholder="Your Password" required>
+            <button type="submit" name="transfer">Transfer</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+{% endblock %} {% endcomment %}

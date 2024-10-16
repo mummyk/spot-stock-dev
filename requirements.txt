@@ -21,3 +21,5 @@ gunicorn
 dj-database-url
 whitenoise
 whitenoise[brotli]
+celery
+requests

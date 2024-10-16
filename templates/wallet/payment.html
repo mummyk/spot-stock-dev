@@ -1,0 +1,10 @@
+<form method="post">
+  {% csrf_token %}
+  <label for="amount">Amount:</label>
+  <input type="number" name="amount" required>
+
+  <button type="submit">Pay with Wallet</button>
+</form>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}

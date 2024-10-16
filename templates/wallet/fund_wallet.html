@@ -1,0 +1,14 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="amount">Amount to Fund:</label>
+    <input type="number" name="amount" required>
+    
+    <label for="description">Description (optional):</label>
+    <input type="text" name="description">
+
+    <button type="submit">Fund Wallet with Card</button>
+</form>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}

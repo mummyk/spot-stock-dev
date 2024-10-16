@@ -1,0 +1,9 @@
+<form method="post">
+   {% csrf_token %}
+   <label for="amount">Amount to Withdraw: </label>
+   <Input type="number" step="0.01" name="amount" required>
+      <label for="amount">Account Password: </label>
+   <Input type="Password" name="password" required>
+   <button type="submit">Withdraw</button>
+</form>
+{% if error %}<p>{{error}}</p>{% endif %}

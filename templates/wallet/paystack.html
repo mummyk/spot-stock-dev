@@ -1,0 +1,39 @@
+{% extends "base.html.html" %}
+{% block extra_head %}
+<script src="https://js.paystack.co/v2/inline.js">
+{% endblock %}
+
+
+{% block content %}
+
+<form id="paymentForm">
+    <input type="email" id="email-address" placeholder="Customer's Email" required />
+    <input type="number" id="amount" placeholder="Amount (in kobo)" required />
+    <button type="button" onclick="payWithPaystack()">Pay with Paystack</button>
+</form>
+
+
+<script>
+function payWithPaystack() {
+    var handler = PaystackPop.setup({
+        key: '{{pub_key}}', // Replace with your public key
+        email: document.getElementById('email-address').value,
+        amount: document.getElementById('amount').value * 100, // Amount in kobo
+        currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+        ref: {{ref_code}}, // Generate a unique reference
+        callback: function(response) {
+            // This happens after the payment is completed successfully
+            var reference = response.reference;
+            alert('Payment complete! Reference: ' + reference);
+            // Optionally, make an AJAX call to your server with the reference to verify the transaction
+        },
+        onClose: function() {
+            alert('Transaction was not completed, window closed.');
+        }
+    });
+    handler.openIframe(); // Open the Paystack payment modal
+}
+</script>
+   
+{% endblock content %}
+   
