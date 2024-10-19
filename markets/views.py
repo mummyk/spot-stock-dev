@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.core.exceptions import ValidationError, FieldError
 from django.contrib import messages
-from utils.barcode_scanner import Barcode_scanner
+# from utils.barcode_scanner import Barcode_scanner
 from .forms import InventoryItemForm, CategoryForm, MeasurementForm, PackForm, RestockHistoryForm, SupplierInfoForm
 from .models import InventoryItem, RestockHistory, Category, SupplierInfo, Pack, Measurement
 from .filters import InventoryItemFilter, CategoryFilter, SupplierFilter, MeasurementFilter, PackageFilter, RestockingFilter, POSFilter
