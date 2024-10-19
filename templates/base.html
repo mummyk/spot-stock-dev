@@ -14,10 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
       <link rel="stylesheet" href="{% static 'css/app.css' %}" />
-		<script
-			src="https://unpkg.com/htmx.org@2.0.2"
-			integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
-			crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.js" integrity="sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg" crossorigin="anonymous"></script>
          <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
          <link rel="icon" type="image/png" href="{% static 'images/SSLlogo.png' %}"/>
          <!-- FontAwesome for icons -->
@@ -35,6 +32,7 @@
         document.documentElement.classList.remove('dark')
     }
 </script>
+
 </head>
 <body class="leading-normal tracking-normal bg-gray-50 dark:bg-gray-900">
     {% include 'partials/messages.html' %}
@@ -87,6 +85,7 @@
             color: #4A325C;
         }
     </style>
+    <script src="{% static 'js/quagga.min.js' %}"></script>
 		<script src="{% static 'js/theme.js' %}" async defer></script>
       <script src="{% static 'js/main.js' %}" async defer></script>
       <script src="{% static 'js/app.bundle.js' %}" async defer></script>

@@ -23,3 +23,8 @@ whitenoise
 whitenoise[brotli]
 celery
 requests
+opencv-python
+pyzbar
+numpy
+keyboard
+django-widget-tweaks

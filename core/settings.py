@@ -94,10 +94,12 @@ SHARED_APPS = (
     "colorfield",
     "phonenumber_field",
     'django_filters',
+    'widget_tweaks',
     "users",
     "dashboard",
     "userMangment",
     "wallet",
+    "markets",
 )
 
 TENANT_APPS = [
@@ -122,10 +124,12 @@ TENANT_APPS = [
     "colorfield",
     "phonenumber_field",
     'django_filters',
+    'widget_tweaks',
     "users",
     "dashboard",
     "userMangment",
     "wallet",
+    "markets",
 ]
 
 INSTALLED_APPS = list(SHARED_APPS) + \

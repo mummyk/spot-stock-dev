@@ -1,34 +1,19 @@
-from django.core.paginator import Paginator
-from .filters import TransactionFilter
-from .models import Transaction  # Ensure you import your Transaction model
-from django.shortcuts import render
-from .filters import UserFilter  # Ensure you have imported the UserFilter
-from .models import User, Wallet
-from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
-from .filters import UserFilter  # Import the updated UserFilter
-import logging
 from decimal import Decimal
-import datetime
-from django.views.decorators.http import require_POST
-from django.http import HttpResponse, JsonResponse
-import requests
-import json
 from django.conf import settings
-from django.db import IntegrityError
-from django.contrib.auth.hashers import check_password
+from django.core.paginator import Paginator
+from django.utils import timezone
+from django.http import HttpResponse
+import logging
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 from utils.paystack import PaystackTransaction
-from .models import Payment
+from .filters import UserFilter  # Import the updated UserFilter
 from .models import Wallet, Transaction, Payment
 from .filters import PaymentFilter, TransactionFilter
-from .forms import UserSearchForm
-from django.db.models import Q
-from django.contrib import messages
 
 
 @login_required

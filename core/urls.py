@@ -12,6 +12,7 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("", include("userMangment.urls")),
     path("", include("tenant.urls")),
+    path("markets/", include("markets.urls")),
     path("wallet/", include("wallet.urls")),
 ]
 

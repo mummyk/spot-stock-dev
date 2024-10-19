@@ -1,0 +1,48 @@
+# urls.py
+from django.urls import path
+from .views import inventory_list, add_inventory_item, scan_barcode, add_categories, add_measurement, add_package, add_suppliers, category_list, edit_categories, delete_categories, supplier_list, edit_supplier, delete_supplier, measurement_list, edit_measurement, delete_measurement, edit_inventory, delete_inventory, package_list, edit_pack, delete_pack, restock_list, restock_item, scan_barcode_sales, sales, posSearch
+
+urlpatterns = [
+    path('inventory/', inventory_list, name='inventory_list'),
+    path('category/', category_list, name='category_list'),
+    path('supplier/', supplier_list, name='supplier_list'),
+    path('pack/', package_list, name='package_list'),
+    path('measurement/', measurement_list, name='measurement_list'),
+    path('restock/', restock_list, name='restock_list'),
+    path('restock/<str:uuid>/',
+         restock_item, name='restock_item'),
+    path('scan/', scan_barcode, name='scan_barcode'),
+    path('add-item/<str:barcode>/', add_inventory_item, name='add_inventory_item'),
+    path('add-category/', add_categories, name='add_category'),
+    path('edit-category/<int:category_id>',
+         edit_categories, name='edit_category'),
+    path('delete-category/<int:category_id>',
+         delete_categories, name='delete_category'),
+    path('add-measurement/', add_measurement, name='add_measurement'),
+    path('add-package/<str:item_id>/', add_package, name='add_package'),
+    path('add-suppliers/', add_suppliers, name='add_suppliers'),
+    path('edit-supplier/<int:supplier_id>',
+         edit_supplier, name='edit_supplier'),
+    path('delete-supplier/<int:supplier_id>',
+         delete_supplier, name='delete_supplier'),
+    path('edit-measurement/<int:measurement_id>',
+         edit_measurement, name='edit_measurement'),
+    path('delete-measurement/<int:measurement_id>',
+         delete_measurement, name='delete_measurement'),
+    path('edit-inventory/<str:inventory_id>',
+         edit_inventory, name='edit_inventory'),
+    path('delete-inventory/<str:inventory_id>',
+         delete_inventory, name='delete_inventory'),
+    path('edit-pack/<str:pack_id>',
+         edit_pack, name='edit_pack'),
+    path('delete-pack/<str:pack_id>',
+         delete_pack, name='delete_pack'),
+
+    # Sales URL
+    path('sales/',
+         sales, name='sales'),
+    path('scan-barcode-sales/',
+         scan_barcode_sales, name='scan_barcode_sales'),
+    path('posSearch/',
+         posSearch, name='posSearch'),
+]

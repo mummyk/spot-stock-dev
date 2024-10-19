@@ -39,3 +39,13 @@ sites.delete_site
 sites.view_site
 
 This list includes permissions for auth, admin, contenttypes, sessions, and sites, which are part of Django's built-in apps. If you have custom apps, they will also have add, change, delete, and view permissions for each model by default.
+
+<div class="mt-3 mb-3 ml-3 mr-3"
+                                      <p>Item ID: ${data.item_id}</p>
+                                      <p>Name: ${data.name}</p>
+                                      <p>Price: $${data.price}</p>
+                                      <p>Discount: ${data.discount}%</p>
+                                      <p>SKU: ${data.sku}</p>
+                                      <h4>Packs:</h4>
+                                      <ul>${data.pack ? `<li>Pack ID: ${data.pack.pack_id}, Price: $${data.pack.pack_price}, Discount: ${data.pack.pack_discount}%</li>` : 'No Pack Available'}</ul>
+                                    </div>

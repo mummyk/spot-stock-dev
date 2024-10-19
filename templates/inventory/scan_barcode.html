@@ -1,0 +1,144 @@
+<!-- templates/inventory/scan_barcode.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'partials/appbar.html' %}
+<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    {% include 'partials/sidebar.html' %}
+
+    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 p-4">
+        <main>
+
+       {% if success %}
+<div id="success-alert" class="bg-green-400 border border-greebg-green-400 text-white px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">successfully: </strong>
+    <span class="block sm:inline">{{ error }}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3 text-white">
+        <button type="button" onclick="document.getElementById('success-alert').style.display='none'">
+            <svg class="fill-current h-6 w-6 text-white" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 00-1.414 1.414l2.934 2.934-2.934 2.934a1 1 0 001.414 1.414L10 10.828l2.934 2.934a1 1 0 001.414-1.414l-2.934-2.934 2.934-2.934z"/>
+            </svg>
+        </button>
+    </span>
+</div>
+{% endif %}
+
+<div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:p-2 xl:gap-4 dark:bg-gray-900 ">
+    <div class="mb-4 col-span-full xl:mb-2">
+        <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+              <li class="inline-flex items-center">
+                <a href="{% url 'home' %}" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-500">
+                  <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                  Home
+                </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                  <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-primary-500">Markets</a>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                  <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Scan barcode</span>
+                </div>
+              </li>
+            </ol>
+        </nav>
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Scan Barcode</h1>
+    </div>
+<div class="flex flex-col justify-center">
+<div id="interactive" class="viewport "></div>
+<button id="startScanner" class="inline-flex items-center justify-center  px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Start Scanner</button>
+</div>
+{% comment %} <div id="result"></div> {% endcomment %}
+
+<style>
+
+   video {
+    width: 400px;
+    height: 300px;
+    padding-bottom: 10px;
+    display: block; /* Ensures padding works as expected */
+    box-sizing: border-box; /* Ensures padding does not add to the width/height */
+}
+
+ canvas {
+    width: 50px;
+    height: 1px;
+    box-sizing: border-box; /* Ensures padding does not add to the width/height */
+}
+
+</style>
+
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script> {% endcomment %}
+
+<script>
+    document.getElementById('startScanner').addEventListener('click', function() {
+        Quagga.init({
+            inputStream : {
+                name : "Live",
+                type : "LiveStream",
+                target: document.querySelector('#interactive'), // Or '#yourElement' (optional)
+                constraints: {
+                    facingMode: "environment" // Use environment camera
+                },
+                area: { // defines rectangle of the detection/localization area
+                  top: "0%",    // top offset
+                  right: "0%",  // right offset
+                  left: "0%",   // left offset
+                  bottom: "0%"  // bottom offset
+               },
+            },
+            decoder : {
+                readers : ["ean_reader", "ean_8_reader", "upc_reader", "upc_e_reader", "code_128_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader","i2of5_reader", "2of5_reader","code_93_reader"] // Add more readers as needed
+            },
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function(data) {
+         const code = data.codeResult.code;
+         console.log(`code: ${code}`)
+         //document.getElementById('result').innerText = `Scanned Barcode: ${code}`;
+
+         // Send the scanned barcode to the server
+         fetch("{% url 'scan_barcode' %}", {
+            method: 'POST',
+            headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token for security
+            },
+            body: JSON.stringify({ barcode: code })
+         })
+         .then(response => response.json())
+         .then(data => {
+            if (data.exists) {
+                  alert(`Barcode ${data.barcode} exists in inventory.`);
+            } else {
+                  //alert(`Barcode ${code} does not exist. You will be redirected to add it.`);
+                  // Redirect to add-item page if barcode does not exist
+                  window.location.href = `/markets/add-item/${code}/`;  // Use the correct URL structure
+            }
+         })
+         .catch(error => {
+            console.error('Error:', error);
+         });
+
+         Quagga.stop(); // Stop scanning after detecting a code
+      });
+
+    });
+</script>
+
+</main>
+</div>
+</div>
+{% endblock %}
